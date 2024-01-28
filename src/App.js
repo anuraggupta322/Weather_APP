@@ -17,22 +17,25 @@ import {
   getWeekForecastWeather,
 } from './utilities/DataUtils';
 
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2d95bd', // Update primary color
+      main: '#2d95bd', 
     },
     background: {
-      default: '#f0f0f0', // Update background color
+      default: '#f0f0f0', // Update default background color
+      customBackground: '#000', // Add custom background color
     },
     text: {
-      primary: '#333', // Update primary text color
+      primary: '#000', // Update primary text color to black
     },
   },
   typography: {
     fontFamily: 'Poppins, sans-serif', // Update default font family
   },
 });
+
 
 function App() {
   const [todayWeather, setTodayWeather] = useState(null);
@@ -42,9 +45,15 @@ function App() {
   const [error, setError] = useState(false);
 
   const searchChangeHandler = async (enteredData) => {
+    
+    if (!enteredData || !enteredData.value) {
+      // Handle the case when enteredData or enteredData.value is null
+      return;
+    }
+    
     const [latitude, longitude] = enteredData.value.split(' ');
 
-    setIsLoading(true);
+  setIsLoading(true);
 
     const currentDate = transformDateFormat();
     const date = new Date();
@@ -99,7 +108,7 @@ function App() {
         component="h4"
         sx={{
           fontSize: { xs: '12px', sm: '14px' },
-          color: 'rgba(255,255,255, .85)',
+          color: '#000', // Update font color to black
           fontFamily: 'Poppins',
           textAlign: 'center',
           margin: '2rem 0',
@@ -155,7 +164,7 @@ function App() {
             component="h3"
             sx={{
               fontSize: { xs: '10px', sm: '12px' },
-              color: 'rgba(255, 255, 255, .8)',
+              color: 'rgba(0, 0, 0, .8)', // Update font color to black
               lineHeight: 1,
               fontFamily: 'Poppins',
             }}
@@ -168,8 +177,10 @@ function App() {
   }
 
   return (
+    
     <ThemeProvider theme={theme}>
       <Container
+
         sx={{
           maxWidth: { xs: '95%', sm: '80%', md: '1100px' },
           width: '100%',
@@ -181,10 +192,7 @@ function App() {
             xs: 'none',
             sm: '0 0 1rem 1rem',
           },
-          boxShadow: {
-            xs: 'none',
-            sm: 'rgba(0,0,0, 0.5) 0px 10px 15px -3px, rgba(0,0,0, 0.5) 0px 4px 6px -2px',
-          },
+          backgroundColor: '#665C5C',
         }}
       >
         <Grid container columnSpacing={2}>
@@ -218,7 +226,7 @@ function App() {
                 <GitHubIcon
                   sx={{
                     fontSize: { xs: '20px', sm: '22px', md: '26px' },
-                    color: 'white',
+                    color: '#000', // Update font color to black
                     '&:hover': { color: '#2d95bd' },
                   }}
                 />
